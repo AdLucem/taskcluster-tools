@@ -13,12 +13,12 @@ export default class DateView extends React.PureComponent {
   }
 
   render() {
-    const { date, since, placement, format } = this.props;
+      const { date, since, placement, format, iso_format } = this.props;
     const tooltip = (
-      <Tooltip id={this.state.id}>{moment(date).format(format)}</Tooltip>
+      <Tooltip id={this.state.id}>{moment(date).format(iso_format)}</Tooltip>
     );
 
-    return (
+      return (
       <OverlayTrigger placement={placement} overlay={tooltip}>
         <span id={this.state.id}>
           {moment(date).fromNow()}{' '}
@@ -33,10 +33,12 @@ DateView.propTypes = {
   date: oneOfType([instanceOf(Date), string]).isRequired,
   since: oneOfType([instanceOf(Date), string]),
   placement: oneOf(['left', 'top', 'right', 'bottom']),
-  format: string
+  format: string,
+  iso_format: string
 };
 
 DateView.defaultProps = {
   format: 'Do of MMMM YYYY, H:mm:ss',
+  iso_format: 'YYYY-MM-DDTHH:mm:ss.sssZ', 
   placement: 'top'
 };
